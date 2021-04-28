@@ -20,10 +20,6 @@ margin: 2.5%;
   margin-left: 10%;
 }
 
-.hero-text {
- 
-}
-
 .hero-title {
   width: 70%;
   margin-top: 15%;
@@ -33,12 +29,16 @@ margin: 2.5%;
 .hero-sub-title {
   font-family: 'Roboto', sans-serif;
   font-size: 1.5em;
-  margin: 0% 0% 0% 20%;
+  margin: 0% 20% 0% 20%;
+}
+
+.gas-price {
+  font-weight: 500;
 }
 
 .form-section {
-  background-color: whitesmoke;
-  font-family: 'Alegreya', serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
   font-size: 1.2em;
   padding-top: 1%;
   margin-top: 5%;
@@ -50,11 +50,20 @@ margin: 2.5%;
 }
 
 .input {
-  width: 40%;
+  width: 20%;
   margin-bottom: 2%;
 }
 
 .submit-button {
-  width: 30%;
-  margin: 0% 35% 5%;
+  color: rgb(230,58,45);
+  width: 20%;
+  margin: 0% 40% 5%;
+}
+
+a {
+  text-align: center;
+  font-weight: 500;
+
+  color: rgb(230,58,45);
+  text-decoration: none;
 }

@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
+import Button from '@material-ui/core/Button';
 import {
   createUsers,
   getPrices,
@@ -19,11 +20,19 @@ function App() {
     // get gas from database
     let gas_price = await getGas()
     let gas = []
+    var d = new Date();
+    var n = d.toISOString();
+    // let gtime = formatDistance(
+    //   gas_price[gas_price.length - 1].updated_at,
+    //  n,
+    //   { includeSeconds: true }
+    // )
     gas.push(Array.from(String(gas_price[gas_price.length - 1].gas_price), Number))
     // get the time of the last gas price pull to tell users how old the price displayed might be.
     gas.push(gas_price[gas_price.length - 1].updated_at)
-    // remove the 0 at the end of the fast gas price
-    // gas[0].pop()
+
+
+console.log(gas_price[gas_price.length - 1].updated_at, n)
     setGas(gas)
   }, [])
  
@@ -40,7 +49,8 @@ function App() {
   }
 
   let handleSubmit = async event => {
-    event.preventDefault();
+    event.preventDefault()
+    debugger
     let formData = {
       email: email,
       telegram: telegram,
@@ -88,15 +98,14 @@ function App() {
         <img class='hero-logo' src={logo_cf_nobg} alt='logo' />
         <div class='hero-text'>
         <img class='hero-title' src={Chainflow} />
-        <p class='hero-sub-title'> Ethereum Gas tracker</p>
+        <p class='hero-sub-title'> Ethereum Gas Tracker</p>
         </div>
         
       </div>
         <div class='form-section'>
-          {/*condition rendering price after useEffect to prevent errors */
+          {/*condition rendering price after useEffect to prevent syncronism errors */
             gas[0] ?
-            <div><p>Current 'Ethereum Gas' price:</p>
-              <p>{gas[0]}| fast</p></div>
+            <div><p>Current 'Ethereum Gas' price:<span class='gas-price'> {gas[0]}| fast</span> </p></div>
             :
               <></>
           }
@@ -120,16 +129,19 @@ function App() {
           onChange={handleEmailChange}
       >
             </input>
-            <label>Your telegram</label>
-        <input
-        class='input'
-        type='text'
-          placeholder='Enter your telegram here'
-          onChange={handleGramChange}
-      >
-            </input>
-            <a href="https://msng.link/o/?EG_price_bot=tg">Message me on Telegram</a>
-        <input class='submit-button' type='submit' value='submit'/>
+            { 
+            // <label>Your telegram</label>
+    //   <input
+      //   class='input'
+      //   type='text'
+      //     placeholder='Enter your telegram here'
+      //     onChange={handleGramChange}
+      // >
+              //       </input>
+            }
+            <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
+          
+            <a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>
         </form>
         </div>
         </div>
