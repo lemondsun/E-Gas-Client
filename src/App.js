@@ -15,6 +15,7 @@ function App() {
   const [email, setEmail] = useState("")
   const [telegram, setTelegram] = useState("")
   const [gas, setGas] = useState(false)
+  const [priceAlert, setPriceAlert] = useState(false)
 
   useEffect(async () => {
     // get gas from database
@@ -37,7 +38,8 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
   }, [])
  
   let handlePriceChange = event => {
-  setPrice(event.target.value)
+    setPrice(event.target.value)
+    setPriceAlert(false)
   }
 
   let handleEmailChange = event => {
@@ -50,11 +52,17 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
 
   let handleSubmit = async event => {
     event.preventDefault()
-    debugger
+
     let formData = {
       email: email,
       telegram: telegram,
     }
+
+    if (price <= 0) {
+      setPriceAlert(true)
+      return
+    }
+
     let priceData = {}
     let result = await getPrices()
     let prices = result.data
@@ -90,30 +98,31 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
   }
   return (
     <div className="App">
-      <div class='header'>
-        <img class='logo' src={logo_cf_nobg } alt='logo'/>
-      </div>
       <div class='body'>
       <div class='hero-section'>
         <img class='hero-logo' src={logo_cf_nobg} alt='logo' />
         <div class='hero-text'>
         <img class='hero-title' src={Chainflow} />
-        <p class='hero-sub-title'> Ethereum Gas Tracker</p>
+        <p class='hero-sub-title'>Ethereum Gas Tracker</p>
         </div>
         
       </div>
         <div class='form-section'>
           {/*condition rendering price after useEffect to prevent syncronism errors */
             gas[0] ?
-            <div><p>Current 'Ethereum Gas' price:<span class='gas-price'> {gas[0]}| fast</span> </p></div>
+              <div>
+                <p class='body-text'>
+                  Current Ethereum gas price:<span class='gas-price'> {gas[0]}| fast</span> as of 
+                </p>
+              </div>
             :
               <></>
           }
       <form class='form' onSubmit={handleSubmit}>
-        <p>
-              Enter your target price, email and/or telegram username below and we will alert you when the 'Ethereum gas' price is at or below your target.
+        <p class='body-text'>
+              Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
         </p>
-            <label>Your target</label>
+            <label class='label'>Your target:</label>
         <input
           class='input'
           type='number'
@@ -121,7 +130,7 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
           onChange={handlePriceChange}
         >
             </input>
-            <label>Your email</label>
+            <label class='label'>Your email:</label>
         <input
         class='input'
         type='email'
@@ -140,11 +149,25 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
               //       </input>
             }
             <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
+            {
+              priceAlert === true ?
+              <div class='alert'>
+              <p>
+                Please enter a price greater than 0 for our service.
+              </p>
+            </div>
+                :
+                <></>
+            }
           
-            <a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>
+            {/*<a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>*/}
         </form>
         </div>
-        </div>
+      </div>
+      <footer>
+        <p>This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>. The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
+        <p>Website is a <a href='https://www.jasonmullingspro.com/'>Jason Mullings</a> production.</p>
+      </footer>
     </div>
   );
 }
