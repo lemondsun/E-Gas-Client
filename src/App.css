@@ -1,12 +1,16 @@
+
+
 .App {
 margin: 2.5%;
+height: 100vh;
 }
 
 .body {
-  margin: 5%;
+  margin: 5% 5% 2.5% 5%;
   background-color: darkgray;
   padding:5%;
   border-radius:10px;
+  height: 100vh;
 }
 
 .logo {
@@ -19,7 +23,7 @@ margin: 2.5%;
 }
 
 .hero-logo {
-  width: 30%;
+  width: 25%;
   margin-left: 10%;
 }
 
@@ -52,9 +56,10 @@ margin: 2.5%;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-size: 1.2em;
-  padding: 5%;
-  margin-top: 5%;
+  padding: 5% 5% 0% 5%;
+  margin-top: 10%;
   border-radius: 10px;
+  height: 50%;
 }
 
 .form {
@@ -84,7 +89,7 @@ margin: 2.5%;
   color: darkgray;
   height: 40px;
   width: 10%;
-  margin: 0% 45% 5%;
+  margin: 3.5% 45% 0%;
   border-radius: 20px;
   border: 1px solid darkgray;
 }
@@ -104,10 +109,219 @@ a {
 footer{
   text-align: center;
   color: rgb(194, 194, 194);
+  margin-bottom: 2.5%;
+  height: 10%;
 }
 
 .alert{
   text-align: center;
   color: rgb(230,58,45);
   font-weight: 500;
+}
+
+/*---------- media queries ------------*/
+
+@media only screen and (max-width: 920px) {
+
+  .form-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    border-radius: 10px;
+    height: 55%;
+  }
+
+}
+
+@media only screen and (max-width: 920px) {
+
+  .hero-sub-title {
+    background: -webkit-linear-gradient(90deg, rgba(228,42,45,1) 0%, rgba(245,179,53,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    margin: 0% 20% 0% 20%;
+  }
+
+  .body {
+    margin: 5% 5% 2.5% 5%;
+    background-color: darkgray;
+    padding:5%;
+    border-radius:10px;
+    height: 95vh;
+  }
+
+  .form-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    border-radius: 10px;
+    height: 65%;
+  }
+
+  .input {
+    width: 50%;
+    margin-bottom: 2%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid rgb(230,58,45);
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .8rem;
+    background-color: rgb(209, 209, 209);
+  }
+
+  .submit-button {
+    color: darkgray;
+    height: 40px;
+    width: 15%;
+    margin: 3% 40% 2.5%;
+    border-radius: 15px;
+    border: 1px solid darkgray;
+  }
+
+  .footer-text {
+    font-size: .9rem;
+  }
+
+}
+
+@media only screen and (max-width: 700px) {
+
+  .form-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    border-radius: 10px;
+    height: 65%;
+  }
+
+  .input {
+    width: 50%;
+    margin-bottom: 2%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid rgb(230,58,45);
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .8rem;
+    background-color: rgb(209, 209, 209);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .hero-sub-title {
+    background: -webkit-linear-gradient(90deg, rgba(228,42,45,1) 0%, rgba(245,179,53,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    margin: 0% 20% 0% 20%;
+  }
+
+  .body {
+    margin: 5% 5% 6.5% 5%;
+    background-color: darkgray;
+    padding:5%;
+    border-radius:10px;
+    height: 75vh;
+  }
+
+  .body-text {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .9rem;
+  }
+
+  .label{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .9rem;
+  }
+
+  .input {
+    width: 40%;
+    margin-bottom: 2%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid rgb(230,58,45);
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .8rem;
+    background-color: rgb(209, 209, 209);
+  }
+
+  .submit-button {
+    color: darkgray;
+    height: 40px;
+    width: 15%;
+    margin: 5% 40%;
+    border-radius: 15px;
+    border: 1px solid darkgray;
+  }
+
+  .footer-text {
+    font-size: .8rem;
+  }
+
+}
+
+@media only screen and (max-width: 530px) {
+
+  .hero-logo {
+    width: 30%;
+    margin-left: 5%;
+  }
+
+  .hero-sub-title {
+    background: -webkit-linear-gradient(90deg, rgba(228,42,45,1) 0%, rgba(245,179,53,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    margin: 0% 0% 0% 7%;
+  }
+
+  .input {
+    width: 50%;
+    margin-bottom: 2%;
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid rgb(230,58,45);
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: .8rem;
+    background-color: rgb(209, 209, 209);
+  }
+
+  .footer-text {
+    font-size: .7rem;
+  }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+  .submit-button {
+    color: darkgray;
+    height: 30px;
+    width: 20%;
+    margin: 2.5% 40%;
+    border-radius: 15px;
+    border: 1px solid darkgray;
+    font-size: .7rem;
+  }
+
 }

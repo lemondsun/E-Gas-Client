@@ -6,7 +6,9 @@ import {
   getPrices,
   setUserPrice,
   getGas
-} from './services/api-helper'
+} from './services/api-helper' 
+import { formatDistance } from 'date-fns'
+// company logos
 import logo_cf_nobg from './images/logo_cf_nobg.png';
 import Chainflow from './images/Chainflow.svg'
 
@@ -16,27 +18,26 @@ function App() {
   const [telegram, setTelegram] = useState("")
   const [gas, setGas] = useState(false)
   const [priceAlert, setPriceAlert] = useState(false)
+  const [emailAlert, setEmailAlert] = useState(false)
+
 
   useEffect(async () => {
-    // get gas from database
+    // gets Ethereum gas price from database.
     let gas_price = await getGas()
     let gas = []
-    var d = new Date();
-    var n = d.toISOString();
-    // let gtime = formatDistance(
-    //   gas_price[gas_price.length - 1].updated_at,
-    //  n,
-    //   { includeSeconds: true }
-    // )
+    // gets time of latest Ethereum gas price pull and assigns to variable.
+    var d = new Date(gas_price[gas_price.length - 1].updated_at);
+    // assigns the difference in text between the variable and the current timen to a variable to save in state.
+    let gtime = formatDistance(
+      new Date(),
+      d,
+      { includeSeconds: true }
+    )
     gas.push(Array.from(String(gas_price[gas_price.length - 1].gas_price), Number))
-    // get the time of the last gas price pull to tell users how old the price displayed might be.
-    gas.push(gas_price[gas_price.length - 1].updated_at)
-
-
-console.log(gas_price[gas_price.length - 1].updated_at, n)
+    gas.push(gtime)
     setGas(gas)
   }, [])
- 
+
   let handlePriceChange = event => {
     setPrice(event.target.value)
     setPriceAlert(false)
@@ -44,6 +45,7 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
 
   let handleEmailChange = event => {
     setEmail(event.target.value)
+    setEmailAlert(false)
   }
   
   let handleGramChange = event => {
@@ -57,9 +59,15 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
       email: email,
       telegram: telegram,
     }
-
+    // makes sure the user enters valid price.
     if (price <= 0) {
       setPriceAlert(true)
+      return
+    }
+
+    // makes sure the user enters an email.
+    if (email === "") {
+      setEmailAlert(true)
       return
     }
 
@@ -78,7 +86,7 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
           break
         }else {
           // if price set by user does not already exist in the database
-          // save user price in database
+          // save users price in database
           // save user with saved price id reference
           await setUserPrice(priceData)
           let result = await getPrices()
@@ -108,11 +116,11 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
         
       </div>
         <div class='form-section'>
-          {/*condition rendering price after useEffect to prevent syncronism errors */
+          {/*condition rendering price after useEffect to prevent async errors */
             gas[0] ?
               <div>
                 <p class='body-text'>
-                  Current Ethereum gas price:<span class='gas-price'> {gas[0]}| fast</span> as of 
+                  The Ethereum gas price is <span class='gas-price'> {gas[0]}| fast</span> as of <span class='gas-price'> {gas[1] }</span> ago.
                 </p>
               </div>
             :
@@ -159,14 +167,24 @@ console.log(gas_price[gas_price.length - 1].updated_at, n)
                 :
                 <></>
             }
+            {
+              emailAlert === true ?
+              <div class='alert'>
+              <p>
+                Please enter a valid email for our service.
+              </p>
+            </div>
+                :
+                <></>
+            }
           
             {/*<a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>*/}
         </form>
         </div>
       </div>
       <footer>
-        <p>This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>. The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
-        <p>Website is a <a href='https://www.jasonmullingspro.com/'>Jason Mullings</a> production.</p>
+        <p class='footer-text' >This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>. The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
+        <p class='footer-text' >Website is a <a href='https://www.jasonmullingspro.com/'>Jason Mullings</a> production.</p>
       </footer>
     </div>
   );
