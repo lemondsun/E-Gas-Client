@@ -1,12 +1,14 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
+import ReactLoading from 'react-loading';
 import Button from '@material-ui/core/Button';
 import {
   createUsers,
   getPrices,
   setUserPrice,
   getGas
-} from './services/api-helper' 
+} from './services/api-helper'
+import LoadingDisplay from './components/LoadingDisplay'
 import { formatDistance } from 'date-fns'
 // company logos
 import logo_cf_nobg from './images/logo_cf_nobg.png';
@@ -19,6 +21,7 @@ function App() {
   const [gas, setGas] = useState(false)
   const [priceAlert, setPriceAlert] = useState(false)
   const [emailAlert, setEmailAlert] = useState(false)
+  const [submitAlert, setSubmitAlert] = useState(false)
 
 
   useEffect(async () => {
@@ -37,6 +40,7 @@ function App() {
     gas.push(gtime)
     setGas(gas)
   }, [])
+
 
   let handlePriceChange = event => {
     setPrice(event.target.value)
@@ -71,6 +75,8 @@ function App() {
       return
     }
 
+    setSubmitAlert(true)
+
     let priceData = {}
     let result = await getPrices()
     let prices = result.data
@@ -94,15 +100,24 @@ function App() {
           formData.price_id= result.data[result.data.length -1].id
           await createUsers(formData)
           break
-             }
-      }
-    }else {
-            priceData.price = parseInt(price)
-            await setUserPrice(priceData)
-            
-            formData.price_id= 1
-            await createUsers(formData)
           }
+      }
+    } else {
+      // incase the prices table is empty
+      // save the users price
+            priceData.price = parseInt(price)
+      await setUserPrice(priceData)
+      // get that price from the list of any that might have been saved at the same time.
+      let thisRresult = await getPrices()
+      for (let i = 0; i < thisRresult.length; i++){
+        if (thisRresult[i] === priceData.price) {
+          // get the matching price.id
+          formData.price_id = thisRresult[i].id
+            await createUsers(formData)}
+      }
+      
+    }
+    
   }
   return (
     <div className="App">
@@ -114,7 +129,8 @@ function App() {
         <p class='hero-sub-title'>Ethereum Gas Tracker</p>
         </div>
         
-      </div>
+        </div>
+
         <div class='form-section'>
           {/*condition rendering price after useEffect to prevent async errors */
             gas[0] ?
@@ -124,12 +140,23 @@ function App() {
                 </p>
               </div>
             :
-              <></>
+            <LoadingDisplay type={'bars' } color={'#EC6431'} />
           }
-      <form class='form' onSubmit={handleSubmit}>
-        <p class='body-text'>
-              Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
+      
+          <form class='form' onSubmit={handleSubmit}>
+            {
+              submitAlert === true ?
+              
+                <div class='submit-section'>
+                  <p class='body-text'>
+                    Thank you for using our service. Refresh the page to enter another price.
+              </p>
+                </div>
+                :
+                <p class='body-text'>
+                  Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
         </p>
+            }
             <label class='label'>Your target:</label>
         <input
           class='input'
@@ -146,17 +173,10 @@ function App() {
           onChange={handleEmailChange}
       >
             </input>
-            { 
-            // <label>Your telegram</label>
-    //   <input
-      //   class='input'
-      //   type='text'
-      //     placeholder='Enter your telegram here'
-      //     onChange={handleGramChange}
-      // >
-              //       </input>
-            }
-            <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
+          
+                  <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
+                  
+          
             {
               priceAlert === true ?
               <div class='alert'>
@@ -169,10 +189,12 @@ function App() {
             }
             {
               emailAlert === true ?
-              <div class='alert'>
+                <div class='alert-background' >
+                  <div class='alert'>
               <p>
-                Please enter a valid email for our service.
+                      Please enter a valid email for our service.
               </p>
+              </div>
             </div>
                 :
                 <></>
@@ -181,6 +203,7 @@ function App() {
             {/*<a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>*/}
         </form>
         </div>
+        
       </div>
       <footer>
         <p class='footer-text' >This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>. The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>

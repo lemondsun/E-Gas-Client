@@ -10,7 +10,7 @@ height: 100vh;
   background-color: darkgray;
   padding:5%;
   border-radius:10px;
-  height: 100vh;
+  height: 110vh;
 }
 
 .logo {
@@ -46,6 +46,15 @@ height: 100vh;
   font-weight: 500;
 }
 
+.loading-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.loading-text {
+padding-top: 20px;
+}
+
 .body-text {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
@@ -59,7 +68,22 @@ height: 100vh;
   padding: 5% 5% 0% 5%;
   margin-top: 10%;
   border-radius: 10px;
-  height: 50%;
+  height: 55%;
+}
+
+.submit-section {
+  background-color: rgb(209, 209, 209);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 1.2em;
+  padding: 5% 5% 0% 5%;
+  margin: 10% 20% 0% 0%;
+  border-radius: 10px;
+  height: 40vh;
+  position: absolute;
+  z-index: 10;
+  top: 50vh;
+  width: 61%;
 }
 
 .form {
@@ -121,19 +145,23 @@ footer{
 
 /*---------- media queries ------------*/
 
-@media only screen and (max-width: 920px) {
+@media only screen and (max-width: 1200px) {
 
-  .form-section {
-    background-color: rgb(209, 209, 209);
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-    font-size: 1.2em;
-    padding: 5% 5% 0% 5%;
-    border-radius: 10px;
-    height: 55%;
-  }
-
+.submit-section {
+  background-color: rgb(209, 209, 209);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 1.2em;
+  padding: 5% 5% 0% 5%;
+  margin-top: 10%;
+  border-radius: 10px;
+  height: 40vh;
+  position: absolute;
+  z-index: 10;
+  top: 40vh;
 }
+}
+
 
 @media only screen and (max-width: 920px) {
 
@@ -164,6 +192,20 @@ footer{
     height: 65%;
   }
 
+  .submit-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    margin-top: 10%;
+    border-radius: 10px;
+    height: 40vh;
+    position: absolute;
+    z-index: 10;
+    top: 35vh;
+  }
+
   .input {
     width: 50%;
     margin-bottom: 2%;
@@ -190,6 +232,22 @@ footer{
     font-size: .9rem;
   }
 
+}
+
+@media only screen and (max-width: 810px) {
+  .submit-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    margin-top: 10%;
+    border-radius: 10px;
+    height: 40vh;
+    position: absolute;
+    z-index: 10;
+    top: 30vh;
+  }
 }
 
 @media only screen and (max-width: 700px) {
@@ -262,6 +320,20 @@ footer{
     background-color: rgb(209, 209, 209);
   }
 
+  .submit-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    margin-top: 10%;
+    border-radius: 10px;
+    height: 40vh;
+    position: absolute;
+    z-index: 10;
+    top: 25vh;
+  }
+
   .submit-button {
     color: darkgray;
     height: 40px;
@@ -293,6 +365,20 @@ footer{
     margin: 0% 0% 0% 7%;
   }
 
+  .submit-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    margin-top: 10%;
+    border-radius: 10px;
+    height: 30vh;
+    position: absolute;
+    z-index: 10;
+    top: 20vh;
+  }
+
   .input {
     width: 50%;
     margin-bottom: 2%;
@@ -314,6 +400,13 @@ footer{
 
 @media only screen and (max-width: 500px) {
 
+  .hero-logo {
+    width: 25%;
+    margin-left: 10%;
+    height: 10vh;
+  }
+
+
   .submit-button {
     color: darkgray;
     height: 30px;
@@ -325,3 +418,67 @@ footer{
   }
 
 }
+
+@media only screen and (max-width: 330px) {
+
+  .submit-section {
+    background-color: rgb(209, 209, 209);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2em;
+    padding: 5% 5% 0% 5%;
+    margin-top: 10%;
+    border-radius: 10px;
+    height: 40vh;
+    position: absolute;
+    z-index: 10;
+    top: 15vh;
+  }
+
+}
+
+@media only screen 
+    and (device-width: 390px) 
+    and (device-height: 844px) 
+    and (-webkit-device-pixel-ratio: 3) {
+
+      .body {
+        margin: 5% 5% 2.5% 5%;
+        padding:5%;
+        border-radius:10px;
+        height: 70vh;
+      }
+
+      .hero-logo {
+        width: 25%;
+        margin-left: 10%;
+        height: 10vh;
+      }
+
+      .input {
+        width: 60%;
+        margin-bottom: 2%;
+        height: 40px;
+        border: none;
+        border-bottom: 1px solid rgb(230,58,45);
+        color:black;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: .8rem;
+        background-color: rgb(209, 209, 209);
+      }
+
+      .submit-section {
+        background-color: rgb(209, 209, 209);
+        font-family: 'Roboto', sans-serif;
+        font-weight: 100;
+        font-size: 1.2em;
+        padding: 5% 5% 0% 5%;
+        margin-top: 10%;
+        border-radius: 10px;
+        height: 40vh;
+        position: absolute;
+        z-index: 10;
+        top: 15vh;
+      }
+     }
