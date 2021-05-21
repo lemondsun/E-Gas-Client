@@ -123,9 +123,9 @@ function App() {
     <div className="App">
       <div class='body'>
       <div class='hero-section'>
-        <img class='hero-logo' src={logo_cf_nobg} alt='logo' />
+        {/*<img class='hero-logo' src={logo_cf_nobg} alt='logo' />*/}
         <div class='hero-text'>
-        <img class='hero-title' src={Chainflow} />
+        {/*<img class='hero-title' src={Chainflow} />*/}
         <p class='hero-sub-title'>Ethereum Gas Tracker</p>
         </div>
         
@@ -206,7 +206,8 @@ function App() {
         
       </div>
       <footer>
-        <p class='footer-text' >This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>. The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
+        {/*<p class='footer-text' >This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>.</p>*/}
+        <p> The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
         <p class='footer-text' >Website is a <a href='https://www.jasonmullingspro.com/'>Jason Mullings</a> production.</p>
       </footer>
     </div>

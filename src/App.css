@@ -7,7 +7,7 @@ height: 100vh;
 
 .body {
   margin: 5% 5% 2.5% 5%;
-  background-color: darkgray;
+  /* background-color: darkgray; */
   padding:5%;
   border-radius:10px;
   height: 110vh;
@@ -33,12 +33,17 @@ height: 100vh;
   margin-left: 5%;
 }
 
+.hero-text{
+  width: 100vw;
+  text-align: center;
+}
+
 .hero-sub-title {
   background: -webkit-linear-gradient(90deg, rgba(228,42,45,1) 0%, rgba(245,179,53,1) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Roboto', sans-serif;
-  font-size: 1.5em;
+  font-size: 4.5em;
   margin: 0% 20% 0% 20%;
 }
 
