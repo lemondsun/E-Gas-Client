@@ -1,17 +1,16 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
-import SucessModal from './components/SucessModal';
+import SuccessModal from './components/SuccessModal';
 import SubmitForm from './components/SumbitForm';
-
+//api helpers
 import {
   createUsers,
   getPrices,
   setUserPrice,
   getGas
 } from './services/api-helper'
+
 import LoadingDisplay from './components/LoadingDisplay'
 import { formatDistance } from 'date-fns'
 // company logos
@@ -57,9 +56,9 @@ function App() {
    
   }
   
-  let handleGramChange = event => {
-    setTelegram(event.target.value)
-  }
+  // let handleGramChange = event => {
+  //   setTelegram(event.target.value)
+  // }
 
   let handleSubmit = async event => {
     event.preventDefault();
@@ -114,26 +113,27 @@ function App() {
           formData.price_id = thisRresult[i].id
             await createUsers(formData)}
       }
-      
     }
     
   }
   return (
     <div className="App">
+      
+      {/*Modal for successfully submiting form */}
+      <SuccessModal show={show} handleClose={handleClose} />
+      
       <Container class='body'>
+        
       <div class='hero-section'>
         <img class='hero-logo' src={logo_cf_nobg} alt='logo' />
         <div class='hero-text'>
-        <img class='hero-title' src={Chainflow} />
+        <img class='hero-title' src={Chainflow} alt='title'/>
         <p class='hero-sub-title'>Ethereum Gas Tracker</p>
         </div>
-        
         </div>
 
-        <SucessModal show={show} handleClose={handleClose }/>
-  
         <div class='form-section'>
-          {/*condition rendering price after useEffect to prevent async errors */
+          {/*condition rendering Ethereum gas price after useEffect gets the Ethereum price to prevent async errors */
             gas[0] ?
               <div>
                 <p class='body-text'>
@@ -141,50 +141,18 @@ function App() {
                 </p>
               </div>
             :
-            <LoadingDisplay type={'bars' } color={'#EC6431'} />
+              <LoadingDisplay
+                type={'bars'}
+                color={'#EC6431'}
+              />
           }
           <SubmitForm
             handleSubmit={handleSubmit}
             handlePriceChange={handlePriceChange}
+            handleEmailChange={handleEmailChange}
+            validated={validated}
           />
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            
-            <Form.Group controlId="formBasicEmail">
-              <p class='body-text'>
-          Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
-</p>
-            <Form.Label>Targeted price</Form.Label>
-              <Form.Control
-                required
-                type='number'
-                placeholder='Enter your target price here'
-                onChange={handlePriceChange} />
-          </Form.Group>
-        
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Email</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                placeholder="Enter email"
-                onChange={handleEmailChange}
-              />
-              <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-          {
-           
-              // <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
-              <Button class='submit-button' type='submit' variant="primary" value='submit' >
-     submit
-    </Button>
-          }
-        </Form>
-       
-        
         </div>
-        
       </Container>
       <footer>
         <p class='footer-text' >This service is brought to you by <a class='text-link' href='https://chainflow.io/'>Chainflow</a>.</p>

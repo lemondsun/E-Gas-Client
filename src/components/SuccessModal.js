@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function SucessModal(props) {
+export default function SuccessModal(props) {
 
 
   return (

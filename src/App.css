@@ -7,7 +7,7 @@ margin: 2.5%;
 }
 
 .container {
-  margin: 2.5% 5% 5% 5%;
+  margin: 2.5% 5% 2% 5%;
   padding:5%;
   border-radius:10px;
 }
@@ -62,7 +62,6 @@ padding-top: 20px;
 }
 
 .form-section {
-  background-color: rgb(209, 209, 209);
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-size: 1.2rem;
@@ -135,7 +134,6 @@ padding-top: 20px;
 footer{
   text-align: center;
   color: rgb(194, 194, 194);
-  /* margin-bottom: 10.5%; */
   height: 10%;
   font-size: 1.2rem;
 }
@@ -192,7 +190,6 @@ footer{
   }
 
   .form-section {
-    background-color: rgb(209, 209, 209);
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2rem;
@@ -268,7 +265,6 @@ footer{
   }
 
   .form-section {
-    background-color: rgb(209, 209, 209);
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
@@ -358,7 +354,6 @@ footer{
   }
 
   .form-section {
-    background-color: rgb(209, 209, 209);
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
@@ -396,13 +391,13 @@ footer{
   }
 
   .form-section {
-    background-color: rgb(209, 209, 209);
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
     padding: 5% 5% 5% 5%;
     border-radius: 10px;
     height: 65%;
+
   }
 
   .completion-section {
@@ -628,7 +623,6 @@ footer{
   }
 
   .form-section {
-    background-color: rgb(209, 209, 209);
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
@@ -667,11 +661,11 @@ footer{
     top: 16vh;
   }
 
-  .submit-button {
+  .btn.btn-primary {
     color: darkgray;
     height: 30px;
     width: 25%;
-    margin: 2.5% 40%;
+    margin: 2.5% 35%;
     border-radius: 15px;
     border: 1px solid darkgray;
     font-size: .7rem;
@@ -710,33 +704,13 @@ footer{
         background-color: rgb(209, 209, 209);
       }
 
-      .submit-section {
-        background-color: rgb(209, 209, 209);
-        font-family: 'Roboto', sans-serif;
-        font-weight: 100;
-        font-size: 1.2em;
-        padding: 5% 5% 0% 5%;
-        margin-top: 10%;
-        border-radius: 10px;
-        height: 40vh;
-        position: absolute;
-        z-index: 10;
-        top: 15vh;
-      }
-
-      .completion-section {
-        background-color: rgb(209, 209, 209);
-        font-family: 'Roboto', sans-serif;
-        font-weight: 100;
-        font-size: 1.2em;
-        padding: 5% 0% 0% 0%;
-        margin-top: 10%;
-        border-radius: 10px;
-        height: 40vh;
-        width: 70%;
-        position: absolute;
-        z-index: 12;
-        left: 9;
-        top: 16vh;
+      .btn.btn-primary {
+        color: darkgray;
+        height: 30px;
+        width: 25%;
+        margin: 2.5% 35%;
+        border-radius: 15px;
+        border: 1px solid darkgray;
+        font-size: .7rem;
       }
      }
