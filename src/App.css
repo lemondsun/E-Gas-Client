@@ -4,14 +4,12 @@ html{
 
 .App {
 margin: 2.5%;
-height: 100vh;
 }
 
-.body {
-  margin: 2.5% 5% 0% 5%;
+.container {
+  margin: 2.5% 5% 5% 5%;
   padding:5%;
   border-radius:10px;
-  height: 110vh;
 }
 
 .hero-section {
@@ -68,7 +66,7 @@ padding-top: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-size: 1.2rem;
-  padding: 5% 5% 0% 5%;
+  padding: 5% 5% 5% 5%;
   margin-top: 10%;
   border-radius: 10px;
   height: 55%;
@@ -112,22 +110,22 @@ padding-top: 20px;
   background-color: rgb(209, 209, 209);
 }
 
-.submit-button {
+.btn.btn-primary {
   color: darkgray;
-  height: 7vh;
-  width: 8vw;
-  margin: 3.5% 45% 0%;
+  margin: 3.5% 40% 0%;
   border-radius: 100px;
   border: 1px solid darkgray;
   font-size: 1.2rem;
+  background-color: white;
 }
 
-.submit-button:hover{
+.btn.btn-primary:hover{
   color: rgb(230,58,45);
   border: 2px solid rgb(230,58,45);
+  background-color: white;
 }
 
-a {
+.text-link {
   text-align: center;
   font-weight: 500;
   color: rgb(230,58,45);
@@ -198,7 +196,7 @@ footer{
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2rem;
-    padding: 5% 5% 0% 5%;
+    padding: 5% 5% 5% 5%;
     margin-top: 10%;
     border-radius: 10px;
     height: 55%;
@@ -274,7 +272,7 @@ footer{
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
-    padding: 5% 5% 0% 5%;
+    padding: 5% 5% 5% 5%;
     border-radius: 10px;
     height: 65%;
   }
@@ -364,7 +362,7 @@ footer{
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
-    padding: 5% 5% 0% 5%;
+    padding: 5% 5% 5% 5%;
     border-radius: 10px;
     height: 70%;
   }
@@ -402,7 +400,7 @@ footer{
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
     font-size: 1.2em;
-    padding: 5% 5% 0% 5%;
+    padding: 5% 5% 5% 5%;
     border-radius: 10px;
     height: 65%;
   }

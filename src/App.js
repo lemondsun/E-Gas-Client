@@ -1,7 +1,11 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
-import ReactLoading from 'react-loading';
-import Button from '@material-ui/core/Button';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import SucessModal from './components/SucessModal';
+import SubmitForm from './components/SumbitForm';
+
 import {
   createUsers,
   getPrices,
@@ -19,9 +23,10 @@ function App() {
   const [email, setEmail] = useState("")
   const [telegram, setTelegram] = useState("")
   const [gas, setGas] = useState(false)
-  const [priceAlert, setPriceAlert] = useState(false)
-  const [emailAlert, setEmailAlert] = useState(false)
-  const [submitAlert, setSubmitAlert] = useState(false)
+  const [show, setShow] = useState(false);
+  const [validated, setValidated] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
 
   useEffect(async () => {
@@ -44,12 +49,12 @@ function App() {
 
   let handlePriceChange = event => {
     setPrice(event.target.value)
-    setPriceAlert(false)
+   
   }
 
   let handleEmailChange = event => {
     setEmail(event.target.value)
-    setEmailAlert(false)
+   
   }
   
   let handleGramChange = event => {
@@ -57,27 +62,21 @@ function App() {
   }
 
   let handleSubmit = async event => {
-    event.preventDefault()
-
+    event.preventDefault();
+    const form = event.currentTarget;
     let formData = {
       email: email,
       telegram: telegram,
     }
-    // makes sure the user enters valid price.
-    if (price <= 0) {
-      setPriceAlert(true)
-      return
-    }
-
-    // makes sure the user enters an email.
-    if (email === "") {
-      setEmailAlert(true)
-      return
-    }
-
-    setSubmitAlert(true)
-
     let priceData = {}
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      setShow(true)
+    }
+    setValidated(true);
+    
     let result = await getPrices()
     let prices = result.data
     priceData.price = parseInt(price)
@@ -121,7 +120,7 @@ function App() {
   }
   return (
     <div className="App">
-      <div class='body'>
+      <Container class='body'>
       <div class='hero-section'>
         <img class='hero-logo' src={logo_cf_nobg} alt='logo' />
         <div class='hero-text'>
@@ -131,6 +130,8 @@ function App() {
         
         </div>
 
+        <SucessModal show={show} handleClose={handleClose }/>
+  
         <div class='form-section'>
           {/*condition rendering price after useEffect to prevent async errors */
             gas[0] ?
@@ -142,76 +143,57 @@ function App() {
             :
             <LoadingDisplay type={'bars' } color={'#EC6431'} />
           }
-      
-          <form class='form' onSubmit={handleSubmit}>
-            {
-              submitAlert === true ?
-              
-                <div class='completion-section'>
-                  <p class='body-text completion-text'>
-                    Thank you for using our service. Refresh the page to enter another price.
-              </p>
-                </div>
-                :
-                <p class='body-text'>
-                  Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
-        </p>
-            }
-            <label class='label'>Your target:</label>
-        <input
-          class='input'
-          type='number'
-          placeholder='Enter your target price here'
-          onChange={handlePriceChange}
-        >
-            </input>
-            <label class='label'>Your email:</label>
-        <input
-        class='input'
-        type='email'
-              placeholder='Enter your Email here'
-          onChange={handleEmailChange}
-      >
-            </input>
-          
-                  
-          
-            {
-              priceAlert === true ?
-              <div class='alert'>
-              <p>
-                Please enter a price greater than 0 for our service.
-              </p>
-            </div>
-                :
-                <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
-
-            }
-            {
-              emailAlert === true ?
-                <div class='alert-background' >
-                  <div class='alert'>
-              <p>
-                      Please enter a valid email for our service.
-              </p>
-              </div>
-            </div>
-                :
-                <></>
-            }
-          
-            {/*<a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>*/}
-        </form>
+          <SubmitForm
+            handleSubmit={handleSubmit}
+            handlePriceChange={handlePriceChange}
+          />
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            
+            <Form.Group controlId="formBasicEmail">
+              <p class='body-text'>
+          Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
+</p>
+            <Form.Label>Targeted price</Form.Label>
+              <Form.Control
+                required
+                type='number'
+                placeholder='Enter your target price here'
+                onChange={handlePriceChange} />
+          </Form.Group>
+        
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Email</Form.Label>
+              <Form.Control
+                required
+                type="email"
+                placeholder="Enter email"
+                onChange={handleEmailChange}
+              />
+              <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+          {
+           
+              // <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
+              <Button class='submit-button' type='submit' variant="primary" value='submit' >
+     submit
+    </Button>
+          }
+        </Form>
+       
+        
         </div>
         
-      </div>
+      </Container>
       <footer>
-        <p class='footer-text' >This service is brought to you by <a class='chainflow-link' href='https://chainflow.io/'>Chainflow</a>.</p>
-        <p class='footer-text' > The Ethereum gas price data is delivered from <a href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
-        <p class='footer-text' >Website is a <a href='https://www.jasonmullingspro.com/'>Jason Mullings</a> production.</p>
+        <p class='footer-text' >This service is brought to you by <a class='text-link' href='https://chainflow.io/'>Chainflow</a>.</p>
+        <p class='footer-text' > The Ethereum gas price data is delivered from <a class='text-link' href='https://docs.defipulse.com/'>DeFi Pulse Data</a>.</p>
+        <p class='footer-text' >Website is a <a class='text-link' href='https://www.jasonmullingspro.com/'>Jason Mullings</a> production.</p>
       </footer>
     </div>
   );
 }
 
 export default App;
+

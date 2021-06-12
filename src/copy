@@ -1,0 +1,59 @@
+ <form class='form' onSubmit={handleSubmit}>
+            {
+              submitAlert === true ?
+              
+                <div class='completion-section'>
+                  <p class='body-text completion-text'>
+                    Thank you for using our service. Refresh the page to enter another price.
+              </p>
+                </div>
+                :
+                <p class='body-text'>
+                  Enter your target price with your email below and we will alert you when the Ethereum gas price is at or below your target.
+        </p>
+            }
+            <label class='label'>Your target:</label>
+        <input
+          class='input'
+          type='number'
+          placeholder='Enter your target price here'
+          onChange={handlePriceChange}
+        >
+            </input>
+            <label class='label'>Your email:</label>
+        <input
+        class='input'
+        type='email'
+              placeholder='Enter your Email here'
+          onChange={handleEmailChange}
+      >
+            </input>
+
+            {
+              priceAlert === true ?
+              <div class='alert'>
+              <p>
+                Please enter a price greater than 0 for our service.
+              </p>
+            </div>
+                :
+                // <Button class='submit-button' variant="outlined" type='submit' value='submit'>Submit</Button>
+                <Button type='submit' variant="primary" value='submit' >
+       submit
+      </Button>
+            }
+            {
+              emailAlert === true ?
+                <div class='alert-background' >
+                  <div class='alert'>
+              <p>
+                      Please enter a valid email for our service.
+              </p>
+              </div>
+            </div>
+                :
+                <></>
+            }
+          
+            {/*<a class='tele-link' href="https://msng.link/o/?EG_price_bot=tg">After submitting your price and email, you can make request for up to the minute Ethereum gas prices on Telegram</a>*/}
+          </form> 
